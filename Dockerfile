@@ -2,6 +2,6 @@
 
 FROM microsoft/dotnet:latest
 WORKDIR /app
-COPY published/AppCoreDocker.dll ./
+COPY . /app
 EXPOSE 5000/tcp
 ENTRYPOINT ["dotnet", "AppCoreDocker.dll"]
