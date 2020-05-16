@@ -2,5 +2,5 @@
 
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS runtime
 WORKDIR /app
-COPY published/aspnetapp.dll ./
+COPY published/AppCoreDocker.dll ./
 ENTRYPOINT ["dotnet", "AppCoreDocker.dll"]
