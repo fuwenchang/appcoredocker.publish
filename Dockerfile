@@ -7,16 +7,17 @@ ENTRYPOINT ["dotnet", "core.docker.dll"]
 
 FROM mcr.microsoft.com/dotnet/core/sdk:2.1-stretch AS build
 WORKDIR /src
-COPY ["AppCoreDocker/AppCoreDocker.csproj", "AppCoreDocker/"]
-RUN dotnet restore "AppCoreDocker/AppCoreDocker.csproj"
+COPY ["core.docker/core.docker.csproj", "core.docker/"]
+RUN dotnet restore "core.docker/core.docker.csproj"
 COPY . .
-WORKDIR "/src/AppCoreDocker"
-RUN dotnet build "AppCoreDocker.csproj" -c Release -o /app/build
+WORKDIR "/src/core.docker"
+RUN dotnet build "core.docker.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "AppCoreDocker.csproj" -c Release -o /app/publish
+RUN dotnet publish "core.docker.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "core.docker.dll"]
+
